@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:insert="Fragments/fragment::head">
+
+</head>
+<body>
+
+<div class="sidebar"  th:insert="Fragments/fragment::sidebar">
+
+</div>
+
+<div class="content">
+    <div class="back-button" style="justify-content: flex-end;" >
+        <a th:href="@{/Students}"><i class="fas fa-arrow-left"></i> Retour</a>
+    </div>
+
+    <div class="form-container">
+        <h1>Rapport</h1>
+
+        <div class="form-group">
+            <label for="classe">Sélectionner une option</label>
+            <select id="classe" name="classe">
+                <option value="" disabled selected>Selectionnez une option</option>
+                <option value="students">Listes des élèves</option>
+                <option value="teachers">Listes des professeurs</option>
+                <option value="users">Listes des Utilisateurs</option>
+            </select>
+        </div>
+
+        <div class="form-actions">
+            <button class="btn-cancel" onclick="downloadFile('pdf')">Générer en format PDF</button>
+            <button class="btn-save" onclick="downloadFile('excel')">Générer en format Excel</button>
+        </div>
+
+    </div>
+</div>
+<script>
+  function downloadFile(format) {
+        var selectedOption = document.getElementById('classe').value;
+      if (selectedOption) {
+           window.location.href = '/Rapport/download?option=' + selectedOption + '&format=' + format;
+      } else {
+           alert("Veuillez sélectionner une option");
+       }
+    }
+
+
+</script>
+
+</body>
+</html>
